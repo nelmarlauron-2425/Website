@@ -1,0 +1,29 @@
+# Login/Signup Form with Password Toggle
+
+This is a simple *Login and Signup form* built with *HTML, CSS, JavaScript, and PHP*.  
+It includes a password visibility toggle (eye icon) and basic form validation.  
+
+## Features
+- Login and Signup forms  
+- Password show/hide toggle (eye icon)  
+- Basic validation using JavaScript  
+- PHP used for form handling  
+- Responsive and clean design  
+
+## Project Structure
+
+## How to Run
+1. Install and start *XAMPP* or any local server (make sure your Apache is running).  
+2. Place the project folder named **Arttrack** inside the 'htdocs'  directory: 
+3. Open your browser and go to: http://localhost/Arttrack/. The login/signup form will load.  
+
+## Usage
+1. Open the project in your browser via your local server.  
+2. Enter your email and password in the form fields.  
+3. Click the eye icon to toggle password visibility.  
+4. Submit the form — PHP will process the data.  
+
+## Author
+Group 8
+BSIT2-02  
+

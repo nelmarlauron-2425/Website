@@ -1,0 +1,158 @@
+/* Reset & Fonts */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #fdfdfd;
+  color: #333;
+}
+
+/* Header */
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  gap: 10px; /* space between logo and text */
+}
+
+.logo img {
+  height: 40px;  /* adjust logo size */
+  width: auto;
+  border-radius: 50%; /* optional: makes it circular */
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px;
+  background: #800000;
+  color: white;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Nav buttons */
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.login-btn, .signup-btn {
+  background: white;
+  color: #800000;
+  font-weight: bold;
+  padding: 6px 15px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.login-btn:hover, .signup-btn:hover {
+  background: #f1f1f1;
+  transform: scale(1.05);
+}
+
+/* Search Bar (below header) */
+.search-container {
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+  background: #fdfdfd;
+}
+
+.search-bar {
+  width: 400px;
+  padding: 10px 15px;
+  border: 2px solid #800000;
+  border-radius: 25px;
+  outline: none;
+  font-size: 14px;
+  transition: width 0.3s ease, box-shadow 0.3s;
+}
+
+.search-bar:focus {
+  width: 500px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+/* Artwork Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.image {
+  height: 200px;
+  background: #ddd;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Days badge */
+.days {
+  background: #f0dcdc;   /* light maroon */
+  color: #000000;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* Price badge */
+.price {
+  background: #f0dcdc;   /* dark maroon */
+  color: rgb(0, 0, 0);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.commission {
+   background: #f0dcdc; /* Pale maroon background */
+  color: #000000;
+  font-weight: 500;
+  padding: 8px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.9rem;
+}
