@@ -1,17 +1,31 @@
 <?php
 session_start();
 require_once __DIR__ . '/dbconfig.php';
-//It get the needed requirements from the users or admin.
-if (isset($_POST['signup'])) {//it checks if the users or admin is clicking the sign up button.
+
+// Check if database connection is established
+if (!isset($conn) || $conn->connect_error) {
+    die("Database connection failed: " . (isset($conn) ? $conn->connect_error : "Connection not established"));
+}
+
+// SIGNUP PROCESS
+if (isset($_POST['signup'])) {
     $first_name = trim($_POST['first_name']);
     $last_name  = trim($_POST['last_name']);
     $email      = trim($_POST['email']);
-    $password   = password_hash($_POST['password'], PASSWORD_BCRYPT);// it encrypts the password so hindi kapag makikita naten sa database yung password is rumbled number or letters.
+    $password   = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $role       = trim($_POST['role']);
 
-    // ito dito chinecheck if yung email is nag eexist na sa database.
+    // Check if email already exists
     $checkEmail = "SELECT * FROM users WHERE email = ?";
     $stmt = $conn->prepare($checkEmail);
+    
+    if ($stmt === false) {
+        $_SESSION['RegistrationError'] = "Database error: " . $conn->error;
+        $_SESSION['activeForm'] = 'signup-form';
+        header("Location: login.php");
+        exit();
+    }
+    
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -20,10 +34,18 @@ if (isset($_POST['signup'])) {//it checks if the users or admin is clicking the 
         $_SESSION['RegistrationError'] = "Email already exists.";
         $_SESSION['activeForm'] = 'signup-form';
     } else {
-        // 
+        // Insert new user
         $insert = "INSERT INTO users (first_name, last_name, email, password, role) 
                    VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insert);
+        
+        if ($stmt === false) {
+            $_SESSION['RegistrationError'] = "Database error: " . $conn->error;
+            $_SESSION['activeForm'] = 'signup-form';
+            header("Location: login.php");
+            exit();
+        }
+        
         $stmt->bind_param("sssss", $first_name, $last_name, $email, $password, $role);
 
         if ($stmt->execute()) {
@@ -33,17 +55,25 @@ if (isset($_POST['signup'])) {//it checks if the users or admin is clicking the 
         }
     }
 
-    header("Location: ../index/login.php");
+    header("Location: login.php");
     exit();
 }
 
-// ✅ LOGIN PROCESS
+// LOGIN PROCESS
 if (isset($_POST['login'])) {
     $email    = trim($_POST['email']);
     $password = trim($_POST['password']);
 
     $query = "SELECT * FROM users WHERE email = ?";
     $stmt = $conn->prepare($query);
+    
+    if ($stmt === false) {
+        $_SESSION['LoginError'] = "Database error: " . $conn->error;
+        $_SESSION['activeForm'] = 'login-form';
+        header("Location: login.php");
+        exit();
+    }
+    
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -54,17 +84,18 @@ if (isset($_POST['login'])) {
         if (password_verify($password, $user['password'])) {
             $_SESSION['name']  = $user['first_name'];
             $_SESSION['email'] = $user['email'];
+            $_SESSION['role'] = $user['role']; // Store role in session
 
-            // ✅ Redirect based on role
+            // Redirect based on role
             switch (strtolower($user['role'])) {
                 case 'admin':
-                    header("Location: ../index/admin_page.php");
+                    header("Location: admin_page.php");
                     break;
                 case 'artist':
-                    header("Location: ../index/artist_page.php");
+                    header("Location: artist_page.php");
                     break;
                 default:
-                    header("Location: ../index/buyer_page.php");
+                    header("Location: buyer_page.php");
                     break;
             }
             exit();
@@ -77,11 +108,11 @@ if (isset($_POST['login'])) {
         $_SESSION['activeForm'] = 'login-form';
     }
 
-    header("Location: ../index/login.php");
+    header("Location: login.php");
     exit();
 }
 
-// ✅ Close the database connection
-$conn->close();
-?>
-<?php   
+// ang purpose neto ay para i-clear ang session data after processing
+if (isset($conn)) {
+    $conn->close();
+}

@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// ✅ Retrieve session messages safely
 $errors = [
   'login'  => $_SESSION['LoginError'] ?? '',
   'signup' => $_SESSION['RegistrationError'] ?? '',
@@ -9,9 +8,7 @@ $errors = [
 
 $activeForm = $_SESSION['activeForm'] ?? 'login-form';
 
-// ✅ Keep only what you need — don’t destroy session before reading
-session_unset();
-
+// Don't unset session here - we need the errors to display
 function showError($error) {
   return !empty($error) ? "<p class='error-message'>$error</p>" : '';
 }
@@ -30,38 +27,39 @@ function isActive($form, $activeForm) {
   <link rel="stylesheet" href="../style.css/login_signup.css">
 </head>
 <body>
-  <!-- ✅ Navbar -->
   <nav class="navbar">
-    <div class="nav-left">
-      <span class="logo-text">ArtTrack</span>
-    </div>
-    <div class="nav-links">
-      <ul class="nav-links">
-        <li><a href="index.php">Home</a></li>
-        <li><a href="login.php">Login</a></li>
-        <li><a href="signup.php">Sign Up</a></li>
-      </ul>
-    </div>
-  </nav>
+  <div class="nav-left">
+    <span class="logo-text">ArtTrack</span>
+  </div>
+  <div class="nav-links">
+      <li><a href="../index.php">Home</a></li>
+      <li><a href="login.php" class="active">Login</a></li>
+      <li><a href="signup.php">Sign Up</a></li>
+  </div>
+</nav>
+
 
   <!-- ✅ Login Container -->
   <div class="container">
     <div class="box image-box">
-   <img src="../images/Logo.png" 
-     alt="ArtTrack logo featuring stylized brush strokes and bold ArtTrack text" 
-     class="placeholder-img">
+      <img src="../images/Logo.png" 
+        alt="ArtTrack logo featuring stylized brush strokes and bold ArtTrack text" 
+        class="placeholder-img">
     </div>
 
     <div class="box form-box <?= isActive('login-form', $activeForm) ?>" id="login-form">
       <h1>Login</h1>
       <?= showError($errors['login']) ?>
 
-  <form action="../config/login_register.php" method="post">
+      <form action="../config/login_register.php" method="post">
         <label for="email">Email</label>
         <input type="email" name="email" required>
 
         <label for="password">Password</label>
-        <input type="password" name="password" required>
+        <div class="password-container">
+          <input type="password" name="password" id="password" required>
+          <i class="fa-solid fa-eye password-toggle" id="togglePassword"></i>
+        </div>
 
         <div class="options">
           <a href="#">Forgot Password?</a>
@@ -69,14 +67,19 @@ function isActive($form, $activeForm) {
 
         <button type="submit" name="login">Log in</button>
 
-        <p>Don’t have an account? 
-          <a href="signup.php" onclick="showForm('signup-form')">Sign up now</a>
+        <p>Don't have an account? 
+          <a href="signup.php">Sign up now</a>
         </p>
       </form>
     </div>
   </div>
 
-  <script src="javascript/login.js"></script>
+  <script src="../javascript/login.js"></script>
 </body>
 </html>
-<?php 
+<?php
+// Clear session messages after displaying them
+unset($_SESSION['LoginError']);
+unset($_SESSION['RegistrationError']);
+unset($_SESSION['activeForm']);
+?>

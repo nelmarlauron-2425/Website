@@ -1,6 +1,4 @@
-<?php
-// You can place any future PHP logic here (e.g., session handling, dynamic data, etc.)
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +7,7 @@
   <title>ArtTrack</title>
 
   <!-- Link to CSS -->
-  <link rel="stylesheet" href="../style.css/landing.css">
+  <link rel="stylesheet" href="/style.css/landing.css">
 
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -24,8 +22,8 @@
     </div>
 
     <ul class="nav-right nav-links">
-      <li><a href="login.html">Log In</a></li>
-      <li><a href="signup.html">Sign Up</a></li>
+      <li><a href="login.php">Log In</a></li>
+      <li><a href="signup.php">Sign Up</a></li>
     </ul>
   </nav>
 
@@ -57,38 +55,7 @@
     </div>
   </div>
 
-  <script>
-    // Artist of the Month: both genders, change monthly, info container
-    async function setArtistOfMonth() {
-      const monthKey = 'artistOfMonth_' + new Date().getFullYear() + '_' + (new Date().getMonth()+1);
-      let artistData = localStorage.getItem(monthKey);
-      if (artistData) {
-        artistData = JSON.parse(artistData);
-      } else {
-        // Fetch random user (male or female)
-        const userRes = await fetch('https://randomuser.me/api/?inc=name,picture,location,gender&noinfo');
-        const userData = await userRes.json();
-        const user = userData.results[0];
-        artistData = {
-          name: user.name.first + ' ' + user.name.last,
-          img: user.picture.large,
-          country: user.location.country,
-          gender: user.gender,
-          bio: `A talented ${user.gender === 'male' ? 'artist' : 'artist'} from ${user.location.country}. Passionate about creativity and expression.`
-        };
-        localStorage.setItem(monthKey, JSON.stringify(artistData));
-      }
-
-      // Set artist info
-      document.querySelector('.artist-img').src = artistData.img;
-      document.querySelector('.artist-img').alt = artistData.name;
-      document.querySelector('.artist-name').textContent = artistData.name;
-      document.querySelector('.artist-country').textContent = artistData.country;
-      document.querySelector('.artist-bio').textContent = artistData.bio;
-    }
-
-    setArtistOfMonth();
-  </script>
+  <script src = "javascript/fetcher_script.js"></script>
 
 </body>
 </html>
