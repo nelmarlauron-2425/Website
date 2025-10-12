@@ -1,0 +1,204 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #fdfdfd;
+  color: #333;
+}
+
+/* Header */
+.header {
+  background: #800000;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.search-container {
+  display: flex;
+  gap: 8px;
+}
+
+.search-container input {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: none;
+  width: 280px;
+}
+
+.search-container button {
+  background: white;
+  color: #800000;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-container button:hover {
+  background: #d9d9d9;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-btn {
+  background: white;
+  color: #800000;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-btn:hover {
+  background: #d9d9d9;
+}
+
+/* Layout */
+.main {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Filters */
+.filters {
+  width: 270px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.filters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#clearAll {
+  background: #800000;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.filter-group {
+  margin-top: 16px;
+}
+
+.filter-group label {
+  font-weight: bold;
+  color: #800000;
+}
+
+.filter-group ul {
+  list-style: none;
+  margin-top: 6px;
+}
+
+.filter-group li {
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+}
+
+#applyPrice {
+  margin-top: 6px;
+  background: #800000;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px;
+  flex: 1;
+}
+
+.art-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.art-card:hover {
+  transform: scale(1.03);
+}
+
+.art-image {
+  background-size: cover;
+  background-position: center;
+}
+
+.small .art-image { height: 160px; }
+.medium .art-image { height: 220px; }
+.large .art-image { height: 300px; }
+
+.art-info {
+  padding: 12px;
+  margin-top: auto;
+  position: relative;
+  background: white;
+}
+
+.art-info h3 {
+  color: #800000;
+  font-size: 1.1rem;
+}
+
+.price {
+  font-weight: bold;
+  color: #333;
+}
+
+.heart-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #800000;
+  font-size: 1.2rem;
+}
+
+.heart-btn.liked i {
+  color: red;
+}

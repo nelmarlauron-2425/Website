@@ -15,7 +15,7 @@ It includes a password visibility toggle (eye icon) and basic form validation.
 ## How to Run
 1. Install and start *XAMPP* or any local server (make sure your Apache is running).  
 2. Place the project folder named **Arttrack** inside the 'htdocs'  directory: 
-3. Open your browser and go to: http://localhost/Arttrack/. The login/signup form will load.  
+3. Open your browser and go to: http://localhost:8000/ The landing page will load. 
 
 ## Usage
 1. Open the project in your browser via your local server.  
