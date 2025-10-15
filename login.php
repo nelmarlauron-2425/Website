@@ -39,7 +39,6 @@ function isActive($form, $activeForm) {
 </nav>
 
 
-  
   <div class="container">
     <div class="box image-box">
       <img src="../images/Logo.png" 

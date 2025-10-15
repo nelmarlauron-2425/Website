@@ -192,10 +192,11 @@ body > * {
 .carousel-btn.prev { left: -60px; }
 .carousel-btn.next { right: -60px; }
 
+/* ========== ARTIST OF THE MONTH ========== */
 .title {
   font-size: 2.2rem;
   font-weight: 800;
-  color: #ffffff;
+  color: #a00000;
   text-align: center;
   margin-top: 60px;
   margin-bottom: 18px;

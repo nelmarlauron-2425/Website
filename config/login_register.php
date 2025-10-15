@@ -89,13 +89,13 @@ if (isset($_POST['login'])) {
             // Redirect based on role
             switch (strtolower($user['role'])) {
                 case 'admin':
-                    header("Location: admin_page.php");
+                    header("Location: /admin_page.php");
                     break;
                 case 'artist':
-                    header("Location: artist_page.php");
+                    header("Location: /artist_page.php");
                     break;
                 default:
-                    header("Location: buyer_page.php");
+                    header("Location: /buyer_page.php");
                     break;
             }
             exit();
