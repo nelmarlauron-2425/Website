@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,17 +6,17 @@
   <title>ArtTrack</title>
 
   <!-- Link to CSS -->
-  <link rel="stylesheet" href="/style.css/landing.css">
+  <link rel="stylesheet" href="style.css/landing.css">
 
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
 
-  <!-- Navigation bar -->
+  <!-- ✅ Navigation bar -->
   <nav class="navbar">
     <div class="nav-left">
-      <img src="../images/logo.png" alt="Logo" class="logo">
+      <img src="images/Logo.png" alt="Logo" class="logo">
       <a href="#" class="logo-text">ArtTrack</a>
     </div>
 
@@ -27,35 +26,60 @@
     </ul>
   </nav>
 
-  <!-- Search bar -->
+  <!-- ✅ Search bar -->
   <form class="search-bar" action="explorer.php" method="get">
     <input type="text" placeholder="Search..." name="q">
     <button type="submit"><i class="fa fa-search"></i></button>
   </form>
 
-  <!-- Image slider -->
-  <div class="container">
-    <div class="slider">
-      <div class="slide"><img src="images/art1.jpg" alt="Art 1"></div>
-      <div class="slide"><img src="images/art2.jpg" alt="Art 2"></div>
-      <div class="slide"><img src="images/art3.jpg" alt="Art 3"></div>
-    </div>
-  </div>
+  <!-- ✅ Carousel Section -->
+  <section class="carousel-section">
+    <div class="carousel">
+      <div class="carousel-slide active">
+        <img src="images/bg.jpg" alt="Slide 1">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/bg.jpg" alt="Slide 2">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/bg.jpg" alt="Slide 3">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/bg.jpg" alt="Slide 4">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/bg.jpg" alt="Slide 5">
+      </div>
+      <div class="carousel-slide">
+        <img src="images/bg.jpg" alt="Slide 6">
+      </div>
 
-  <!-- Artist of the Month -->
-  <h1 class="title">Artist of the Month</h1>
-  <div class="artist-of-month" id="artistOfMonthContainer">
-    <div class="artist-img-container">
+      <!-- ✅ Navigation buttons inside carousel -->
+      <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
+
+      <!-- ✅ Dots -->
+      <div class="carousel-dots"></div>
+    </div>
+  </section>
+
+  <!-- ✅ Artist of the Month -->
+  <section class="artist-section">
+    <h1 class="title">Artist of the Month</h1>
+
+    <div class="artist-container" id="artistOfMonthContainer">
       <img src="images/artist.jpg" alt="Artist of the Month" class="artist-img">
-    </div>
-    <div class="artist-info">
-      <p class="artist-name">Loading...</p>
-      <p class="artist-country"></p>
-      <p class="artist-bio"></p>
-    </div>
-  </div>
 
-  <script src = "javascript/fetcher_script.js"></script>
+      <div class="artist-details">
+        <p class="artist-name">Loading...</p>
+        <p class="artist-country"></p>
+        <p class="artist-bio"></p>
+      </div>
+    </div>
+  </section>
 
+  
+  <script src="javascript/fetcher_script.js"></script>
+  <script src="javascript/carousel.js"></script>
 </body>
 </html>

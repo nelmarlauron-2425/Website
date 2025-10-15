@@ -1,50 +1,31 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const track = document.querySelector(".carousel-track");
-  const slides = Array.from(document.querySelectorAll(".carousel-slide"));
-  const nextButton = document.querySelector(".carousel-btn.next");
-  const prevButton = document.querySelector(".carousel-btn.prev");
-  const dotNav = document.querySelector(".carousel-dots");
+const slides = document.querySelectorAll('.carousel-slide');
+const nextBtn = document.querySelector('.carousel-btn.next');
+const prevBtn = document.querySelector('.carousel-btn.prev');
 
-  // ✅ Check if carousel exists
-  if (!track || slides.length === 0) return;
+let current = 0;
 
-  // Create dots dynamically
-  slides.forEach((_, index) => {
-    const dot = document.createElement("button");
-    if (index === 0) dot.classList.add("active");
-    dotNav.appendChild(dot);
+function updateSlides() {
+  slides.forEach((slide, i) => {
+    slide.classList.remove('active', 'prev', 'next');
   });
 
-  const dots = Array.from(dotNav.children);
-  let currentIndex = 0;
+  slides[current].classList.add('active');
 
-  // Move to specific slide
-  function goToSlide(index) {
-    track.style.transform = `translateX(-${index * 100}%)`;
-    dots.forEach(dot => dot.classList.remove("active"));
-    dots[index].classList.add("active");
-    currentIndex = index;
-  }
+  const prev = (current - 1 + slides.length) % slides.length;
+  const next = (current + 1) % slides.length;
 
-  // Buttons
-  nextButton?.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % slides.length;
-    goToSlide(currentIndex);
-  });
+  slides[prev].classList.add('prev');
+  slides[next].classList.add('next');
+}
 
-  prevButton?.addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-    goToSlide(currentIndex);
-  });
-
-  // Dots
-  dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => goToSlide(index));
-  });
-
-  // Auto-slide every 6 seconds
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % slides.length;
-    goToSlide(currentIndex);
-  }, 6000);
+nextBtn.addEventListener('click', () => {
+  current = (current + 1) % slides.length;
+  updateSlides();
 });
+
+prevBtn.addEventListener('click', () => {
+  current = (current - 1 + slides.length) % slides.length;
+  updateSlides();
+});
+
+updateSlides();
