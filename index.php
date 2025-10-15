@@ -13,7 +13,6 @@
 </head>
 <body>
 
-  <!-- ✅ Navigation bar -->
   <nav class="navbar">
     <div class="nav-left">
       <img src="images/Logo.png" alt="Logo" class="logo">
