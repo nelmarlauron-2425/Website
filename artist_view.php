@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArtTrack Dashboard</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Make sure this path is correct -->
-    <script src="script.js" defer></script>
+
+    <!-- ✅ Corrected CSS path -->
+    <link rel="stylesheet" href="../style.css/artist.css">
+
+    <!-- Optional JS file -->
+    <script src="../javascript/script.js" defer></script>
 </head>
 <body>
 
@@ -14,7 +18,7 @@
         <div class="left-header">
             <button class="back-btn">←</button>
             <div class="logo-section">
-                <img src="logo.png" alt="Logo" class="logo">
+                <img src="../images/logo.png" alt="Logo" class="logo">
                 <span>ArtTrack</span>
             </div>
         </div>
@@ -26,10 +30,18 @@
 
     <!-- Stats Section -->
     <section class="stats">
-        <div class="stat"><h3>Active Commissions: <span id="active-commissions">3</span></h3></div>
-        <div class="stat"><h3>Completed: <span id="completed">12</span></h3></div>
-        <div class="stat"><h3>Total Earnings: <span id="total-earnings">$2,500</span></h3></div>
-        <div class="stat"><h3>Avg. Rating: <span id="avg-rating">4.9</span></h3></div>
+        <div class="stat">
+            <h3>Active Commissions: <span id="active-commissions">3</span></h3>
+        </div>
+        <div class="stat">
+            <h3>Completed: <span id="completed">12</span></h3>
+        </div>
+        <div class="stat">
+            <h3>Total Earnings: <span id="total-earnings">$2,500</span></h3>
+        </div>
+        <div class="stat">
+            <h3>Avg. Rating: <span id="avg-rating">4.9</span></h3>
+        </div>
     </section>
 
     <!-- Quick Actions -->
@@ -42,6 +54,7 @@
         </div>
     </section>
 
+    <!-- Active Commissions -->
     <section class="commissions">
         <h2>Active Commissions</h2>
 

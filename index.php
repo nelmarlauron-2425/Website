@@ -21,7 +21,7 @@
     </div>
 
     <ul class="nav-right nav-links">
-      <li><a href="login.php">Log In</a></li>
+      <li><a href="artist_view.php">Log In</a></li>
       <li><a href="signup.php">Sign Up</a></li>
     </ul>
   </nav>
@@ -54,16 +54,14 @@
         <img src="images/bg.jpg" alt="Slide 6">
       </div>
 
-      <!-- ✅ Navigation buttons inside carousel -->
       <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>
       <button class="carousel-btn next"><i class="fa-solid fa-chevron-right"></i></button>
 
-      <!-- ✅ Dots -->
+
       <div class="carousel-dots"></div>
     </div>
   </section>
 
-  <!-- ✅ Artist of the Month -->
   <section class="artist-section">
     <h1 class="title">Artist of the Month</h1>
 
