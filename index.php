@@ -21,7 +21,7 @@
     </div>
 
     <ul class="nav-right nav-links">
-      <li><a href="artist_view.php">Log In</a></li>
+      <li><a href="login.php">Log In</a></li>
       <li><a href="signup.php">Sign Up</a></li>
     </ul>
   </nav>
