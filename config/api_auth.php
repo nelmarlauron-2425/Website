@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { http_response_code(204); exit; }
 function json_out(array $d, int $c=200){ http_response_code($c); header('Content-Type: application/json'); echo json_encode($d, JSON_UNESCAPED_SLASHES); exit; }
 function columnExists(mysqli $db, string $col): bool {
   $sql="SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA=? AND TABLE_NAME='users' AND COLUMN_NAME=?";
-  $stmt=$db->prepare($sql); $dbName=DB_NAME; $stmt->bind_param('ss',$dbName,$col); $stmt->execute(); $stmt->store_result(); $ok=$stmt->num_rows>0; $stmt->close(); return $ok;
+  $stmt=$db->prepare($sql); $dbName='attrack_db'; $stmt->bind_param('ss',$dbName,$col); $stmt->execute(); $stmt->store_result(); $ok=$stmt->num_rows>0; $stmt->close(); return $ok;
 }
 
 $hasHash = columnExists($mysqli,'password_hash');

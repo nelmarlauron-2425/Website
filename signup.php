@@ -77,8 +77,7 @@ function isActive($form, $activeForm) {
       </form>
     </div>
   </div>
-
-  <script src="../javascript/login.js"></script>
+  <script src="/javascript/signup_validation.js"></script>
 </body>
 </html>
 <?php

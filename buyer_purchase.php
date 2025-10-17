@@ -3,39 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Dashboard - ArtTrack</title>
-  <link rel="stylesheet" href="style.css/user.css" />
+  <title>User Purchase - ArtTrack</title>
+  <link rel="stylesheet" href="/style.css/user_purchase.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-  <style>
-    .add-order-btn {
-      margin: 20px 0;
-      background: #800000;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-  </style>
 </head>
 <body>
 
   <!-- Header -->
   <header class="header">
-    <div class="left-header">
-      <button class="back-btn" onclick="history.back()">
-        <i class="fa-solid fa-arrow-left"></i>
-      </button>
-      <img src="CC_20250930_211854.png" alt="Logo" class="logo" />
-      <h1>ArtTrack</h1>
-    </div>
-    <nav class="nav-buttons">
-      <button class="dashboard-btn">User Dashboard</button>
-      <button class="logout-btn" onclick="logout()">Logout</button>
-    </nav>
-  </header>
+  <div class="left-header">
+    <button class="back-btn" onclick="history.back()">&#8592;</button>
+    <img src="/images/Logo.png" alt="ArtTrack Logo" class="logo">
+    <h1>ArtTrack</h1>
+  </div>
+
+  <div class="right-header">
+    <img src="/images/user.webp" alt="User Profile" class="profile-pic" onclick="goToProfile()">
+  </div>
+</header>
+
 
   <!-- Stats -->
+   
   <section class="stats">
     <div class="stat">
       <span>Active Orders</span>
@@ -52,7 +41,26 @@
     
   </section>
 
-  
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Artists</title>
+  <link rel="stylesheet" href="/style.css/user_purchase.css">
+  <!-- Font Awesome for search icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="browse-container">
+    <h3>Browse Artists</h3>
+    <div class="search-box">
+      <i class="fa fa-search"></i>
+      <input type="text" placeholder="Find Artists">
+      
+    </div>
+  </div>
+</body>
+
+  <!-- Orders -->
    <section class="orders" id="orderList">
   <div class="orders-header">
     <h2>My Orders</h2>
@@ -153,8 +161,10 @@
   </div>
 </section>
 
+<!-- Keep your modals here -->
 
-  
+
+  <!-- MESSAGE MODAL -->
   <div id="messageModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('messageModal')">&times;</span>
@@ -178,6 +188,7 @@
     </div>
   </div>
 
+  <!-- PAYMENT MODAL -->
   <div id="paymentModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('paymentModal')">&times;</span>
@@ -190,9 +201,9 @@
       <div id="onlineOptions" class="online-options" style="display: none;">
         <p>Select your online payment:</p>
         <div class="payment-icons">
-          <div class="pay-option" data-link="https://www.gcash.com/"><img src="GCash-Logo.png" alt="GCash"><span>GCash</span></div>
-          <div class="pay-option" data-link="https://www.maya.ph/"><img src="PayMaya-Logo_Vertical.png" alt="PayMaya"><span>PayMaya</span></div>
-          <div class="pay-option" data-link="https://www.bpi.com.ph/"><img src="Bpi-Bank-Of-The-Philippine-Islands-Logo-Vector.svg-.png" alt="BPI"><span>BPI</span></div>
+          <div class="pay-option" data-link="https://www.gcash.com/"><img src="/images/GCash-Logo.png" alt="GCash"><span>GCash</span></div>
+          <div class="pay-option" data-link="https://www.maya.ph/"><img src="/images/PayMaya-Logo_Vertical.png" alt="PayMaya"><span>PayMaya</span></div>
+          <div class="pay-option" data-link="https://www.bpi.com.ph/"><img src="/images/Bpi-Bank-Of-The-Philippine-Islands-Logo-Vector.svg-.png" alt="BPI"><span>BPI</span></div>
         </div>
       </div>
 
@@ -200,7 +211,7 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="/javascript/user_purchase.js"></script>
 
 </body>
 </html>

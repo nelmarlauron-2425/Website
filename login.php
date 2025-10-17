@@ -61,7 +61,7 @@ function isActive($form, $activeForm) {
         </div>
 
         <div class="options">
-          <a href="#">Forgot Password?</a>
+          <a href="forgot_password.php">Forgot Password?</a>
         </div>
 
         <button type="submit" name="login">Log in</button>
@@ -73,7 +73,7 @@ function isActive($form, $activeForm) {
     </div>
   </div>
 
-  <script src="../javascript/login.js"></script>
+  <script src="/javascript/login.js"></script>
 </body>
 </html>
 <?php

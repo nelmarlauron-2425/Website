@@ -7,7 +7,9 @@ if (!isset($conn) || $conn->connect_error) {
     die("Database connection failed: " . (isset($conn) ? $conn->connect_error : "Connection not established"));
 }
 
+// =============================
 // SIGNUP PROCESS
+// =============================
 if (isset($_POST['signup'])) {
     $first_name = trim($_POST['first_name']);
     $last_name  = trim($_POST['last_name']);
@@ -22,7 +24,7 @@ if (isset($_POST['signup'])) {
     if ($stmt === false) {
         $_SESSION['RegistrationError'] = "Database error: " . $conn->error;
         $_SESSION['activeForm'] = 'signup-form';
-        header("Location: login.php");
+        header("Location: ../login.php");
         exit();
     }
     
@@ -42,7 +44,7 @@ if (isset($_POST['signup'])) {
         if ($stmt === false) {
             $_SESSION['RegistrationError'] = "Database error: " . $conn->error;
             $_SESSION['activeForm'] = 'signup-form';
-            header("Location: login.php");
+            header("Location: ../login.php");
             exit();
         }
         
@@ -55,11 +57,13 @@ if (isset($_POST['signup'])) {
         }
     }
 
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
+// =============================
 // LOGIN PROCESS
+// =============================
 if (isset($_POST['login'])) {
     $email    = trim($_POST['email']);
     $password = trim($_POST['password']);
@@ -70,7 +74,7 @@ if (isset($_POST['login'])) {
     if ($stmt === false) {
         $_SESSION['LoginError'] = "Database error: " . $conn->error;
         $_SESSION['activeForm'] = 'login-form';
-        header("Location: login.php");
+        header("Location: ../login.php");
         exit();
     }
     
@@ -84,18 +88,18 @@ if (isset($_POST['login'])) {
         if (password_verify($password, $user['password'])) {
             $_SESSION['name']  = $user['first_name'];
             $_SESSION['email'] = $user['email'];
-            $_SESSION['role'] = $user['role']; // Store role in session
+            $_SESSION['role']  = $user['role']; // Store role in session
 
             // Redirect based on role
             switch (strtolower($user['role'])) {
                 case 'admin':
-                    header("Location: /admin_page.php");
+                    header("Location: ../admin_page.php");
                     break;
                 case 'artist':
-                    header("Location: /artist_page.php");
+                    header("Location: ../artist_browser.php");
                     break;
                 default:
-                    header("Location: /buyer_page.php");
+                    header("Location: ../buyer_browser.php");
                     break;
             }
             exit();
@@ -108,11 +112,14 @@ if (isset($_POST['login'])) {
         $_SESSION['activeForm'] = 'login-form';
     }
 
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
-// ang purpose neto ay para i-clear ang session data after processing
+// =============================
+// Close DB connection
+// =============================
 if (isset($conn)) {
     $conn->close();
 }
+?>

@@ -1,21 +1,13 @@
 <?php
-/* config/secrets.php */
 declare(strict_types=1);
 
-/**
- * Set to true on your machine to get verbose JSON errors (never enable on prod)
- */
+// Debug mode (set to false in production)
 const APP_DEBUG = true;
 
-/**
- * Development MASTER OTP ( => 000000 ) to bypass email during LOCAL testing.
- * Set to false/null to disable.
- */
-const DEV_MASTER_OTP = '000000';
+// 🧩 IMPORTANT: Replace with your actual SendGrid API key
+const SENDGRID_API_KEY = 'SG.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
 
-// Put your real key here:
-const SENDGRID_API_KEY = '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';
-
-// Verified sender in your SendGrid account:
-const APP_FROM_EMAIL = 'ardreaiuser@gmail.com';
-const APP_FROM_NAME  = 'ArtTrack';
+// 🧩 Use a verified sender from your SendGrid account
+//    (Go to SendGrid → Settings → Sender Authentication → Single Sender)
+const APP_FROM_EMAIL = 'youremail@gmail.com';  // <-- must be verified in SendGrid
+const APP_FROM_NAME  = 'ArtTrack Support';

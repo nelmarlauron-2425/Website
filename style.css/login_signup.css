@@ -1,20 +1,4 @@
-
-/* Highlight logo beside login/signup form */
-.login-logo, .signup-logo {
-  width: 70px;
-  height: 70px;
-  border-radius: 0%;
-  object-fit: cover;
-  box-shadow: 0 0 0 3px #3498db, 0 2px 8px rgba(0,0,0,0.10);
-  border: 2px solid #ffffff00;
-  margin-right: 12px;
-  transition: box-shadow 0.3s, border-color 0.3s;
-}
-.login-logo:hover, .signup-logo:hover {
-  box-shadow: 0 0 0 5px #ff6f61, 0 4px 16px rgba(0,0,0,0.15);
-  border-color: #ff6f61;
-}
-
+/* General Reset */
 * {
   margin: 0;
   padding: 0;
@@ -22,6 +6,7 @@
   font-family: 'Segoe UI', Arial, sans-serif;
 }
 
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -30,18 +15,10 @@
   margin: -9px -9px 0 -9px;
   padding: 10px 30px;
 }
-/* Right side: nav links (Home, Log in, Sign up) */
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
 
-/* Left side: logo and ArtTrack text centered vertically */
 .nav-left {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   gap: 14px;
 }
 
@@ -50,19 +27,7 @@
   font-weight: 700;
   color: #f8f5f5;
   letter-spacing: 2px;
-  text-decoration: none;
   text-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  line-height: 1.2;
-  display: inline-block;
-  margin-left: 0;
-  vertical-align: middle;
-}
-.navbar-logo {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 0;
 }
 
 .nav-links {
@@ -70,16 +35,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 0;
-  padding: 0;
 }
-
-.nav-links li {
-  display: flex;
-  align-items: center;
-}
-
-
 
 .nav-links a {
   color: white;
@@ -88,14 +44,15 @@
   padding: 8px 18px;
   border-radius: 4px;
   transition: background 0.2s, color 0.2s;
-  display: block;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active {
   background: #800000;
   color: #fff;
 }
 
+/* Container */
 .container {
   display: flex;
   justify-content: center;
@@ -109,26 +66,30 @@
   flex: 1;
 }
 
+/* Image Box */
 .placeholder-img {
   width: 100%;
   height: 400px;
   object-fit: contain;
-  background-color: #eeeeee00;
-  border-radius: -8px;
+  background-color: transparent;
+  border-radius: 10px;
 }
 
+/* Form Box */
 .form-box {
   background: #f4f4f4;
   padding: 30px;
-  border-radius: -1222px;
+  border-radius: 10px;
   box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
 }
 
 .form-box h1 {
   margin-bottom: 20px;
   text-align: center;
+  color: #800000;
 }
 
+/* Form Fields */
 form label {
   display: block;
   margin-top: 10px;
@@ -142,8 +103,34 @@ form input, form select {
   margin-bottom: 15px;
   border: 1px solid #aaa;
   border-radius: 5px;
+  font-size: 1rem;
 }
 
+/* Password Container */
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 40px; /* space for eye icon */
+}
+
+.password-container .password-toggle {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.3s;
+}
+
+.password-container .password-toggle:hover {
+  color: #333;
+}
+
+/* Buttons */
 form button {
   width: 100%;
   padding: 12px;
@@ -160,24 +147,7 @@ form button:hover {
   background: #800000;
 }
 
-/* Responsive design for mobile */
-@media (max-width: 700px) {
-  .container {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
-    margin: 20px 8px;
-  }
-  .placeholder-img {
-    height: 200px;
-  }
-  .form-box {
-    padding: 16px;
-  }
-}
-
-/* Remove duplicate button hover */
-
+/* Links & Messages */
 form p {
   margin-top: 15px;
   text-align: center;
@@ -188,8 +158,64 @@ form a {
   text-decoration: none;
 }
 
-input[type="password"]::-ms-reveal,
-input[type="password"]::-ms-clear {
-  display: block !important;
-  opacity: 1 !important;
+form a:hover {
+  text-decoration: underline;
+}
+
+/* Error Messages */
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Logo Hover (for login/signup logo) */
+.login-logo, .signup-logo {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  box-shadow: 0 0 0 3px #3498db, 0 2px 8px rgba(0,0,0,0.10);
+  margin-right: 12px;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.login-logo:hover, .signup-logo:hover {
+  box-shadow: 0 0 0 5px #ff6f61, 0 4px 16px rgba(0,0,0,0.15);
+  border-color: #ff6f61;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    margin: 20px 8px;
+  }
+
+  .placeholder-img {
+    height: 200px;
+  }
+
+  .form-box {
+    padding: 16px;
+  }
+}
+#password-strength {
+  font-family: 'Segoe UI', sans-serif;
+  margin-top: 3px;
+  display: block;
+}
+
+#password-strength.weak {
+  color: red;
+}
+
+#password-strength.medium {
+  color: orange;
+}
+
+#password-strength.strong {
+  color: green;
 }

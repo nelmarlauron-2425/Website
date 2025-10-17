@@ -7,6 +7,7 @@
 }
 
 /* Header */
+/* Header */
 .header {
   display: flex;
   justify-content: space-between;
@@ -16,46 +17,52 @@
   padding: 15px 25px;
 }
 
+/* Left Section */
 .left-header {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 }
 
 .back-btn {
   background: white;
   border: none;
-  color: #800000;
-  padding: 6px 10px;
   border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 20px;
   cursor: pointer;
-  font-size: 16px;
-  transition: 0.3s;
-}
-
-.back-btn:hover {
-  background: #ffd5d5;
+  color: #800000;
 }
 
 .logo {
-  width: 28px;
-  height: 28px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
 }
 
-.nav-buttons button {
-  background: white;
-  border: none;
-  border-radius: 20px;
-  color: #800000;
-  font-weight: 600;
-  padding: 8px 16px;
-  margin-left: 10px;
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Right Section */
+.right-header {
+  display: flex;
+  align-items: center;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   cursor: pointer;
+  border: 2px solid white;
   transition: 0.3s;
 }
 
-.nav-buttons button:hover {
-  background: #ffd5d5;
+.profile-pic:hover {
+  transform: scale(1.1);
 }
 
 /* Stats */
@@ -351,4 +358,67 @@ textarea {
 .add-order-btn:hover {
   background-color: #a00000;
   transform: scale(1.05);
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+.browse-container {
+  background-color: #d9d9d9;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  width: 1020px;
+  margin: 50px auto;
+  box-sizing: border-box;
+}
+
+.browse-container h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #999;
+  padding: 15px 15px;
+}
+
+.search-box i {
+  color: #555;
+  margin-right: 8px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  width:200%;
+  font-size: 14px;
+}
+
+.artist-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+.artist-list li {
+  padding: 8px 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.artist-list li:hover {
+  background-color: #f0f0f0;
+}
+
+.artist-list li:last-child {
+  border-bottom: none;
 }
