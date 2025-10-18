@@ -1,34 +1,28 @@
-function openModal(id) { 
-  document.getElementById(id).style.display = 'flex'; 
+// ========== 🔹 BASIC MODAL HANDLERS ==========
+function openModal(id) {
+  document.getElementById(id).style.display = 'flex';
+}
+function closeModal(id) {
+  document.getElementById(id).style.display = 'none';
+}
+function goToProfile() {
+  window.location.href = "user_profile.php ";
 }
 
-function closeModal(id) { 
-  document.getElementById(id).style.display = 'none'; 
+// ========== 🔹 DYNAMIC ORDER MANAGEMENT ==========
+function updateActiveOrders(change) {
+  const activeCount = document.getElementById("activeCount");
+  let current = parseInt(activeCount.innerText);
+  current += change;
+  if (current < 0) current = 0;
+  activeCount.innerText = current;
 }
 
-function logout() {
-  alert("You have been logged out!");
-  window.location.href = "login.html";
-}
-
-// 🟥 Cancel Order Function
-function cancelOrder(button) {
-  if (confirm("Are you sure you want to cancel this order?")) {
-    const orderCard = button.closest(".order-card");
-    orderCard.remove();
-    updateActiveOrders(-1);
-    alert("Order has been canceled.");
-  }
-}
-
-// 🟩 Add Order Function
+// 🟩 Add new order (local only for now)
 function addOrder() {
   const orderList = document.getElementById("orderList");
-
-  // New order card structure (same as existing)
   const newOrder = document.createElement("div");
   newOrder.classList.add("order-card");
-
   newOrder.innerHTML = `
     <div class="order-header">
       <div class="title-status">
@@ -40,65 +34,6 @@ function addOrder() {
       </div>
     </div>
     <p class="artist">Artist: Pending Assignment</p>
-
-    <div class="progress-section">
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 0%;"></div>
-      </div>
-      <div class="progress-details">
-        <p class="progress-text">Progress: 0%</p>
-        <p class="due-date"><strong>Due:</strong> TBD</p>
-      </div>
-    </div>
-
-    <div class="actions-right">
-      <button class="blue" onclick="openModal('messageModal')">
-        <i class="fa-solid fa-message"></i> Message
-      </button>
-      <button class="green"
-        onclick="openViewModal(this)"
-        data-project="New Art Commission"
-        data-artist="Pending Assignment"
-        data-price="₱1,500"
-        data-status="In Progress"
-        data-progress="0%"
-        data-image="">
-        <i class="fa-solid fa-eye"></i> View
-      </button>
-      <button class="purple" onclick="openModal('paymentModal')">
-        <i class="fa-solid fa-credit-card"></i> Payment
-      </button>
-      <button class="red" onclick="cancelOrder(this)">
-        <i class="fa-solid fa-xmark"></i> Cancel
-      </button>
-    </div>
-  `;
-
-  // Append to order list
-  orderList.appendChild(newOrder);
-
-  // Update Active Orders count
-  const activeCount = document.querySelectorAll(".order-card").length;
-  document.getElementById("activeCount").innerText = activeCount;
-
-  alert("✅ New order added successfully!");
-}
-
-
-  // Create new order element
-  const newOrder = document.createElement("div");
-  newOrder.classList.add("order-card");
-  newOrder.innerHTML = `
-    <div class="order-header">
-      <div class="title-status">
-        <h3>New Custom Order</h3>
-        <span class="status">In Progress</span>
-      </div>
-      <div class="order-info">
-        <p><strong>Price:</strong> ₱1,000</p>
-      </div>
-    </div>
-    <p class="artist">Artist: Unknown</p>
     <div class="progress-section">
       <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
       <div class="progress-details">
@@ -107,45 +42,26 @@ function addOrder() {
       </div>
     </div>
     <div class="actions-right">
-      <button class="blue" onclick="openModal('messageModal')">
-        <i class="fa-solid fa-message"></i> Message
-      </button>
-      <button class="green" onclick="openViewModal(this)"
-        data-project="New Custom Order"
-        data-artist="Unknown"
-        data-price="₱1,000"
+      <button class="blue" data-action="message"><i class="fa-solid fa-message"></i> Message</button>
+      <button class="green" data-action="view"
+        data-project="New Art Commission"
+        data-artist="Pending Assignment"
+        data-price="₱1,500"
         data-status="In Progress"
         data-progress="0%"
         data-image="">
         <i class="fa-solid fa-eye"></i> View
       </button>
-      <button class="purple" onclick="openModal('paymentModal')">
-        <i class="fa-solid fa-credit-card"></i> Payment
-      </button>
-      <button class="red" onclick="cancelOrder(this)">
-        <i class="fa-solid fa-xmark"></i> Cancel
-      </button>
+      <button class="purple" data-action="payment"><i class="fa-solid fa-credit-card"></i> Payment</button>
+      <button class="red" data-action="cancel"><i class="fa-solid fa-xmark"></i> Cancel</button>
     </div>
   `;
-
-  // Add to page
   orderList.appendChild(newOrder);
-
-  // Update active order count
-  const activeCount = document.querySelectorAll(".order-card").length;
-  document.getElementById("activeCount").innerText = activeCount;
-
-
-// 🟦 Update Active Orders Counter
-function updateActiveOrders(change) {
-  const activeCount = document.getElementById("activeCount");
-  let current = parseInt(activeCount.innerText);
-  current += change;
-  if (current < 0) current = 0;
-  activeCount.innerText = current;
+  updateActiveOrders(1);
+  alert("✅ New order added successfully!");
 }
 
-// 🟨 Payment + View Modal Scripts
+// ========== 🔹 PAYMENT + MESSAGE + VIEW ==========
 function showPaymentOptions(type) {
   const onlineSection = document.getElementById("onlineOptions");
   onlineSection.style.display = type === 'online' ? "block" : "none";
@@ -173,27 +89,19 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Please type a message before sending.");
       return;
     }
-    alert("Message sent successfully!");
+    alert("📨 Message sent successfully!");
     messageText.value = "";
     closeModal("messageModal");
   });
 });
 
 function openViewModal(button) {
-  const project = button.getAttribute("data-project");
-  const artist = button.getAttribute("data-artist");
-  const price = button.getAttribute("data-price");
-  const status = button.getAttribute("data-status");
-  const progress = button.getAttribute("data-progress");
-  const image = button.getAttribute("data-image");
-
-  document.getElementById("viewProject").innerText = project;
-  document.getElementById("viewArtist").innerText = artist;
-  document.getElementById("viewPrice").innerText = price;
-  document.getElementById("viewStatus").innerText = status;
-  document.getElementById("viewProgress").innerText = progress;
-  document.getElementById("viewImage").src = image;
-
+  document.getElementById("viewProject").innerText = button.getAttribute("data-project");
+  document.getElementById("viewArtist").innerText = button.getAttribute("data-artist");
+  document.getElementById("viewPrice").innerText = button.getAttribute("data-price");
+  document.getElementById("viewStatus").innerText = button.getAttribute("data-status");
+  document.getElementById("viewProgress").innerText = button.getAttribute("data-progress");
+  document.getElementById("viewImage").src = button.getAttribute("data-image");
   openModal('viewModal');
 }
 
@@ -220,11 +128,96 @@ function confirmPayment() {
   closeModal('paymentModal');
 }
 
-window.onclick = function(event) {
-  document.querySelectorAll('.modal').forEach(modal => {
+// ========== 🔹 EVENT DELEGATION (FIX FOR BUTTONS) ==========
+document.addEventListener("click", (event) => {
+  const btn = event.target.closest("button");
+  if (!btn) return;
+  const action = btn.dataset.action;
+  if (!action) return;
+
+  switch (action) {
+    case "message":
+      openModal('messageModal');
+      break;
+    case "view":
+      openViewModal(btn);
+      break;
+    case "payment":
+      openModal('paymentModal');
+      break;
+    case "cancel":
+      if (confirm("Are you sure you want to cancel this order?")) {
+        const orderCard = btn.closest(".order-card");
+        orderCard.remove();
+        updateActiveOrders(-1);
+        alert("❌ Order has been canceled.");
+      }
+      break;
+  }
+});
+
+// ========== 🔹 CLICK OUTSIDE MODAL ==========
+window.onclick = function (event) {
+  document.querySelectorAll(".modal").forEach(modal => {
     if (event.target == modal) modal.style.display = "none";
   });
 };
-function goToProfile() {
-  window.location.href = "profile.html";
+
+// ========== 🔹 LOAD BACKEND ORDERS ==========
+async function loadOrders(buyerId = 1) {
+  try {
+    const response = await fetch(`/backend/user_purchase_backend.php?buyer_id=${buyerId}`);
+    const data = await response.json();
+    if (!data.success) return console.error("Failed to fetch:", data.error);
+
+    const orderList = document.getElementById("orderList");
+
+    data.orders.forEach(order => {
+      const orderCard = document.createElement("div");
+      orderCard.classList.add("order-card");
+      orderCard.innerHTML = `
+        <div class="order-header">
+          <div class="title-status">
+            <h3>${order.artwork_title}</h3>
+            <span class="status">${order.status}</span>
+          </div>
+          <div class="order-info">
+            <p><strong>Price:</strong> ₱${order.total_price}</p>
+          </div>
+        </div>
+        <p class="artist">Artist: ${order.artist_name}</p>
+        <div class="progress-section">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${order.status === "Completed" ? "100%" : "40%"};"></div>
+          </div>
+          <div class="progress-details">
+            <p class="progress-text">Progress: ${order.status === "Completed" ? "100%" : "40%"}%</p>
+            <p class="due-date"><strong>Due:</strong> ${order.due_date}</p>
+          </div>
+        </div>
+        <div class="actions-right">
+          <button class="blue" data-action="message"><i class="fa-solid fa-message"></i> Message</button>
+          <button class="green" data-action="view"
+            data-project="${order.artwork_title}"
+            data-artist="${order.artist_name}"
+            data-price="₱${order.total_price}"
+            data-status="${order.status}"
+            data-progress="${order.status === "Completed" ? "100%" : "40%"}"
+            data-image="${order.artwork_image ? '/uploads/' + order.artwork_image : '/images/default_art.png'}">
+            <i class="fa-solid fa-eye"></i> View
+          </button>
+          <button class="purple" data-action="payment"><i class="fa-solid fa-credit-card"></i> Payment</button>
+          <button class="red" data-action="cancel"><i class="fa-solid fa-xmark"></i> Cancel</button>
+        </div>
+      `;
+      orderList.appendChild(orderCard);
+    });
+
+    document.getElementById("activeCount").innerText =
+      document.querySelectorAll(".order-card").length;
+  } catch (err) {
+    console.error("Error loading backend orders:", err);
+  }
 }
+
+document.addEventListener("DOMContentLoaded", () => loadOrders(1));

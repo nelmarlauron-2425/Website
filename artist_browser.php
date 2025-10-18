@@ -27,10 +27,10 @@
     <div class="nav-buttons">
       <a href= "about.php"class="nav-btn" id="aboutBtn">About</a>
       <a href = "contact_us.php"class="nav-btn" id="contactBtn">Contact</a>
-      <a href = "commission.php" class="nav-btn" id="commissionBtn">Commission</a>
-      <button class="profile-btn" id="profilePic">
+      <a href = "artist_commission.php" class = "nav-btn" id="commissionBtn">Commission</a>
+      <a href= "artist_profile.php" class="profile-btn" id="profilePic">
         <img src="/images/user.webp" alt="Profile">
-      </button>
+      </a>
     </div>
   </header>
 
@@ -105,7 +105,7 @@
    <section class="gallery" id="gallery">
 
   <div class="art-card medium" data-category="Painting" data-medium="Watercolor" data-subject="Landscape" data-size="Medium" data-material="Paper" data-price="5000">
-    <div class="art-image" style="background-image:url('art1.jpg')"></div>
+    <div class="art-image" style="background-image:url('/images/art1.png')"></div>
     <div class="art-info">
       <div class="art-navbar">
         <h3>Sunset Dreams</h3>
@@ -117,7 +117,7 @@
   </div>
 
   <div class="art-card small" data-category="Digital Art" data-medium="Acrylic" data-subject="Portrait" data-size="Medium" data-material="Canvas" data-price="2000">
-    <div class="art-image" style="background-image:url('art2.jpg')"></div>
+    <div class="art-image" style="background-image:url('/images/art2.png')"></div>
     <div class="art-info">
       <div class="art-navbar">
         <h3>Modern Muse</h3>
