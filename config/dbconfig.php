@@ -6,6 +6,7 @@ if (!isset($conn) || !$conn instanceof mysqli) {
     $database = 'arttrack_db';
 
 
+    // First, try to connect without selecting database to check if it exists
     $temp_conn = new mysqli($host, $username, $password);
     
     if ($temp_conn->connect_error) {
