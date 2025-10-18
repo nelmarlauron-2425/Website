@@ -11,7 +11,7 @@
   <!-- HEADER -->
   <header class="header">
   <div class="logo">
-    <img src="CC_20250930_211854.png" alt="Logo" class="logo-img">
+    <img src="/images/Logo.png" alt="Logo" class="logo-img">
   </div>
 
   <div class="search-bar">

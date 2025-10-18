@@ -1,60 +1,118 @@
-// ❤️ Heart Like Button
-document.querySelectorAll(".heart-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    btn.classList.toggle("liked");
-    const icon = btn.querySelector("i");
-    if (icon) {
-      icon.classList.toggle("fa-regular");
-      icon.classList.toggle("fa-solid");
-    }
-  });
-});
+const API_URL = "api/buyerbrowser_backend.php";
 
-// 🔍 Search + Filter System
-const searchBar = document.getElementById("searchBar");
+const searchInput = document.getElementById("searchBar");
 const searchBtn = document.getElementById("searchBtn");
-const artCards = document.querySelectorAll(".art-card");
+const applyPriceBtn = document.getElementById("applyPrice");
+const clearAllBtn = document.getElementById("clearAll");
+const minPriceInput = document.getElementById("minPrice");
+const maxPriceInput = document.getElementById("maxPrice");
+const filterInputs = document.querySelectorAll(".filter");
 
-function applyFilters() {
-  const query = searchBar.value.toLowerCase();
-  const min = parseFloat(document.getElementById("minPrice").value) || 0;
-  const max = parseFloat(document.getElementById("maxPrice").value) || Infinity;
-  const selectedFilters = Array.from(document.querySelectorAll(".filter:checked")).map(cb => cb.value);
+// ✅ Gather filters
+function getFilters() {
+  const filters = {};
 
-  artCards.forEach(card => {
+  // Search
+  const search = searchInput?.value.trim();
+  if (search) filters.search = search.toLowerCase();
+
+  // Checkbox filters
+  ["category", "medium", "subject", "size", "material"].forEach((type) => {
+    const selected = Array.from(
+      document.querySelectorAll(`.filter[data-filter="${type}"]:checked`)
+    ).map((el) => el.value);
+    if (selected.length > 0) filters[type] = selected;
+  });
+
+  // Price range
+  const minPrice = parseFloat(minPriceInput?.value) || null;
+  const maxPrice = parseFloat(maxPriceInput?.value) || null;
+  if (minPrice) filters.minPrice = minPrice;
+  if (maxPrice) filters.maxPrice = maxPrice;
+
+  return filters;
+}
+
+// ✅ Apply filters to the visible DOM cards (don’t remove)
+function applyLocalFilters(filters) {
+  const cards = document.querySelectorAll(".art-card");
+
+  cards.forEach((card) => {
     const title = card.querySelector("h3").textContent.toLowerCase();
+    const category = card.dataset.category;
+    const medium = card.dataset.medium;
+    const subject = card.dataset.subject;
+    const size = card.dataset.size;
+    const material = card.dataset.material;
     const price = parseFloat(card.dataset.price);
-    const attributes = Object.values(card.dataset);
-    const matchQuery = title.includes(query);
-    const matchPrice = price >= min && price <= max;
-    const matchFilter = selectedFilters.length === 0 || selectedFilters.some(f => attributes.includes(f));
-    card.style.display = (matchQuery && matchPrice && matchFilter) ? "block" : "none";
+
+    let visible = true;
+
+    // Search filter
+    if (filters.search && !title.includes(filters.search)) visible = false;
+
+    // Category / Medium / Subject / Size / Material
+    if (filters.category && !filters.category.includes(category)) visible = false;
+    if (filters.medium && !filters.medium.includes(medium)) visible = false;
+    if (filters.subject && !filters.subject.includes(subject)) visible = false;
+    if (filters.size && !filters.size.includes(size)) visible = false;
+    if (filters.material && !filters.material.includes(material)) visible = false;
+
+    // Price range
+    if (filters.minPrice && price < filters.minPrice) visible = false;
+    if (filters.maxPrice && price > filters.maxPrice) visible = false;
+
+    // Show or hide
+    card.style.display = visible ? "block" : "none";
   });
 }
 
-searchBtn.addEventListener("click", applyFilters);
-document.getElementById("applyPrice").addEventListener("click", applyFilters);
-document.querySelectorAll(".filter").forEach(cb => cb.addEventListener("change", applyFilters));
+// ✅ Optional backend sync (for future use)
+async function fetchBackend(filters) {
+  const params = new URLSearchParams();
 
-// 🧹 Clear All
-document.getElementById("clearAll").addEventListener("click", () => {
-  document.querySelectorAll(".filter").forEach(cb => (cb.checked = false));
-  document.getElementById("minPrice").value = "";
-  document.getElementById("maxPrice").value = "";
-  document.getElementById("searchBar").value = "";
-  artCards.forEach(card => (card.style.display = "block"));
+  if (filters.search) params.append("search", filters.search);
+  if (filters.minPrice) params.append("minPrice", filters.minPrice);
+  if (filters.maxPrice) params.append("maxPrice", filters.maxPrice);
+
+  ["category", "medium", "subject", "size", "material"].forEach((type) => {
+    if (filters[type]?.length) params.append(type, filters[type].join(","));
+  });
+
+  try {
+    const res = await fetch(`${API_URL}?${params.toString()}`);
+    const data = await res.json();
+    console.log("Backend synced:", data);
+  } catch (err) {
+    console.error("Backend fetch failed:", err);
+  }
+}
+
+// ✅ Apply all filters (frontend + backend)
+function applyAllFilters() {
+  const filters = getFilters();
+  applyLocalFilters(filters);
+  fetchBackend(filters);
+}
+
+// ✅ Event Listeners
+searchBtn?.addEventListener("click", applyAllFilters);
+searchInput?.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") applyAllFilters();
 });
 
-// 🧭 Navigation Buttons
-document.getElementById("aboutBtn").addEventListener("click", () => {
-  alert("🎨 Welcome to Art Gallery — showcasing creative works from artists worldwide!");
+filterInputs.forEach((f) => f.addEventListener("change", applyAllFilters));
+applyPriceBtn?.addEventListener("click", applyAllFilters);
+
+clearAllBtn?.addEventListener("click", () => {
+  document.querySelectorAll(".filter").forEach((f) => (f.checked = false));
+  minPriceInput.value = "";
+  maxPriceInput.value = "";
+  searchInput.value = "";
+  applyAllFilters();
 });
 
-document.getElementById("contactBtn").addEventListener("click", () => {
-  alert("📩 Contact us: artgalleryofficial@gmail.com");
-});
-
-// 👤 Profile Button → Go to Dashboard
-document.getElementById("profileBtn").addEventListener("click", () => {
-  window.location.href = "USER DASHBOARD/USERDASHBOARD.html"; // update path if needed
+// ✅ Initial load
+window.addEventListener("DOMContentLoaded", () => {
+  applyAllFilters();
 });

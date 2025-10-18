@@ -35,22 +35,28 @@
   <section class="carousel-section">
     <div class="carousel">
       <div class="carousel-slide active">
-        <img src="images/bg.jpg" alt="Slide 1">
+        <img src="/images/art1.png" alt="Slide 1">
       </div>
       <div class="carousel-slide">
-        <img src="images/bg.jpg" alt="Slide 2">
+        <img src="/images/art4.png" alt="Slide 2">
       </div>
       <div class="carousel-slide">
-        <img src="images/bg.jpg" alt="Slide 3">
+        <img src="/images/art3.png" alt="Slide 3">
       </div>
       <div class="carousel-slide">
-        <img src="images/bg.jpg" alt="Slide 4">
+        <img src="/images/bg.jpg" alt="Slide 4">
       </div>
       <div class="carousel-slide">
-        <img src="images/bg.jpg" alt="Slide 5">
+        <img src="/images/art5.png" alt="Slide 5">
       </div>
       <div class="carousel-slide">
-        <img src="images/bg.jpg" alt="Slide 6">
+        <img src="/images/art6.png" alt="Slide 6">
+      </div>
+       <div class="carousel-slide">
+        <img src="/images/art7.png" alt="Slide 7">
+      </div>
+      <div class="carousel-slide">
+        <img src="/images/art2.png" alt="Slide 8 ">
       </div>
 
       <button class="carousel-btn prev"><i class="fa-solid fa-chevron-left"></i></button>

@@ -28,9 +28,10 @@
       <a href= "about.php"class="nav-btn" id="aboutBtn">About</a>
       <a href = "contact_us.php"class="nav-btn" id="contactBtn">Contact</a>
       <a href = "buyer_purchase.php" class="nav-btn" id="commissionBtn">Purchase</a>
-      <button class="profile-btn" id="profilePic">
-        <img src="/images/user.webp" alt="Profile">
-      </button>
+      <a href="user_profile.php" class="profile-btn" id="profilePic">
+  <img src="/images/user.webp" alt="Profile">
+</a>
+
     </div>
   </header>
 
@@ -105,7 +106,7 @@
    <section class="gallery" id="gallery">
 
   <div class="art-card medium" data-category="Painting" data-medium="Watercolor" data-subject="Landscape" data-size="Medium" data-material="Paper" data-price="5000">
-    <div class="art-image" style="background-image:url('art1.jpg')"></div>
+    <div class="art-image" style="background-image:url('/images/art1.png')"></div>
     <div class="art-info">
       <div class="art-navbar">
         <h3>Sunset Dreams</h3>
